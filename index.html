@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ORIGO Cacao Studio — Del origen al sabor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  /* Couleurs extraites exactement du logo ORIGO */
+  --green: #4a7c59;       /* vert du logo (oeil, barre) */
+  --green-dark: #2d5438;
+  --red: #c84b35;         /* rouge/terracotta du logo (arche) */
+  --blue: #3b5fa0;        /* bleu cobalt du logo (vague/M) */
+  --gold: #e8b84b;        /* or chaud du logo (spirale) */
+  --gold-light: #f5d98a;
+  --cream: #fdf8f0;       /* fond crème chaud */
+  --cream-dark: #f0e6d3;
+  --brown: #2c1810;       /* brun foncé texte/fond */
+  --brown-mid: #5c3520;
+  --brown-light: #8b5e3c;
+  --warm-white: #fffbf5;
+  --text: #2c1810;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  background: var(--cream);
+  color: var(--brown);
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ── PROMO BANNER ── */
+.promo-banner {
+  background: var(--red);
+  color: white;
+  text-align: center;
+  padding: 0.65rem 1rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 100;
+  animation: pulse-banner 3s ease-in-out infinite;
+}
+@keyframes pulse-banner {
+  0%, 100% { background: var(--red); }
+  50% { background: #b03a26; }
+}
+.promo-banner span { color: var(--gold-light); font-weight: 700; }
+.promo-countdown { display: inline-flex; gap: 0.4rem; margin-left: 0.8rem; }
+.promo-countdown .unit {
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.85rem;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  background: rgba(44, 24, 16, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 50px;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(232, 184, 75, 0.3);
+  transition: top 0.3s;
+}
+nav.has-banner { top: 3.5rem; }
+nav a {
+  color: var(--cream);
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  border-radius: 30px;
+  transition: all 0.2s;
+}
+nav a:hover { background: var(--gold); color: var(--brown); }
+nav .nav-cta {
+  background: var(--red);
+  color: white;
+  margin-left: 0.5rem;
+}
+nav .nav-cta:hover { background: #e05c42; color: white; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--brown);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+  background-size: 40px 40px;
+}
+
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+}
+.hero-circle-1 { width: 600px; height: 600px; background: var(--gold); top: -200px; right: -150px; }
+.hero-circle-2 { width: 400px; height: 400px; background: var(--red); bottom: -100px; left: -100px; }
+.hero-circle-3 { width: 300px; height: 300px; background: var(--green); top: 50%; left: 10%; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: hero-in 1.2s ease-out both;
+}
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-logo {
+  width: 240px;
+  height: auto;
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 24px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(232,184,75,0.2);
+  animation: logo-float 6s ease-in-out infinite;
+}
+@keyframes logo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-opening-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--red);
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+.badge-dot { width: 8px; height: 8px; background: var(--gold-light); border-radius: 50%; animation: dot-blink 1s ease-in-out infinite; }
+@keyframes dot-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+  display: block;
+}
+
+.hero-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: rgba(253,248,240,0.7);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.hero-tag {
+  border: 1px solid rgba(232,184,75,0.4);
+  color: var(--gold-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 30px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--gold);
+  color: var(--brown);
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  transition: all 0.3s;
+  margin-right: 1rem;
+}
+.hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,184,75,0.4); }
+.hero-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 2px solid rgba(253,248,240,0.4);
+  color: var(--cream);
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+.hero-cta-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(253,248,240,0.4);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: scroll-bob 2s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.8; }
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(253,248,240,0.4), transparent);
+}
+
+/* ── OPENING PROMO SECTION ── */
+.promo-section {
+  background: var(--brown);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.promo-inner {
+  background: linear-gradient(135deg, var(--red) 0%, #a03828 50%, var(--brown-mid) 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.promo-inner::before {
+  content: '★ INAUGURACIÓN ★';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  font-family: 'Playfair Display', serif;
+  font-size: 12vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.promo-date-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--brown);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+.promo-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.promo-section h2 em { color: var(--gold); font-style: italic; }
+.promo-section p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.promo-cards {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.promo-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s;
+}
+.promo-card:hover { transform: translateY(-4px); }
+.promo-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.promo-card .value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.promo-card .label {
+  color: rgba(255,255,255,0.8);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.payment-pill {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 30px;
+  padding: 0.5rem 1.2rem;
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.promo-cta-btn {
+  display: inline-block;
+  background: white;
+  color: var(--red);
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1.1rem 3rem;
+  border-radius: 50px;
+  transition: all 0.3s;
+  margin-top: 1.5rem;
+}
+.promo-cta-btn:hover { background: var(--gold); transform: scale(1.03); }
+
+/* ── DIVIDERS ── */
+.wave-divider { display: block; width: 100%; line-height: 0; }
+
+/* ── SECTION COMMONS ── */
+section { position: relative; }
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--red); }
+.section-title.gold em { color: var(--gold); }
+
+/* ── CONCEPTO ── */
+.concepto {
+  background: var(--cream);
+  padding: 7rem 2rem;
+}
+.concepto-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.concepto-text { }
+.concepto-text .section-label { color: var(--green); }
+.concepto-text p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--brown-mid);
+  margin-bottom: 1.5rem;
+}
+.concepto-text .handwriting {
+  font-family: 'Caveat', cursive;
+  font-size: 1.6rem;
+  color: var(--red);
+  transform: rotate(-1.5deg);
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.pillar {
+  background: white;
+  border-radius: 16px;
+  padding: 1.75rem;
+  border-left: 5px solid var(--green);
+  box-shadow: 0 4px 20px rgba(44,24,16,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.pillar:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(44,24,16,0.12); }
+.pillar:nth-child(2) { border-left-color: var(--red); }
+.pillar:nth-child(3) { border-left-color: var(--blue); }
+.pillar-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.pillar h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.pillar p { font-size: 0.9rem; line-height: 1.7; color: var(--brown-mid); }
+
+/* ── EXPERIENCIA ── */
+.experiencia {
+  background: var(--brown);
+  padding: 7rem 2rem;
+  color: var(--cream);
+  overflow: hidden;
+}
+.experiencia-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.experiencia .section-label { color: var(--gold); opacity: 1; }
+.experiencia .section-title { color: white; }
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+  align-items: center;
+}
+
+.exp-photo {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.exp-photo img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+.exp-photo-placeholder {
+  width: 100%;
+  height: 500px;
+  background: linear-gradient(135deg, var(--brown-mid), var(--brown-light));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.exp-photo-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.exp-photo-tag {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: var(--gold);
+  color: var(--brown);
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  transform: rotate(-2deg);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(232,184,75,0.15);
+  transition: background 0.3s, border-color 0.3s;
+  cursor: default;
+}
+.step:hover {
+  background: rgba(232,184,75,0.1);
+  border-color: rgba(232,184,75,0.4);
+}
+.step-num {
+  width: 48px;
+  height: 48px;
+  background: var(--gold);
+  color: var(--brown);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.step-content h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  margin-bottom: 0.3rem;
+}
+.step-content p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(253,248,240,0.75);
+}
+
+/* ── PRODUCTORES ── */
+.productores {
+  background: var(--cream-dark);
+  padding: 7rem 2rem;
+}
+.productores-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.productores .section-label { color: var(--green); }
+.productores-intro {
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--brown-mid);
+  max-width: 700px;
+  margin-bottom: 4rem;
+}
+
+.producer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.producer-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(44,24,16,0.1);
+  transition: transform 0.4s, box-shadow 0.4s;
+  position: relative;
+}
+.producer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(44,24,16,0.18);
+}
+
+.producer-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+.producer-img-placeholder {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.6);
+}
+.prod-ceibo .producer-img-placeholder { background: linear-gradient(135deg, #2d5a27, #4a7c59); }
+.prod-fedecovera .producer-img-placeholder { background: linear-gradient(135deg, #1a5c1a, #3d8b3d); }
+.prod-chankuap .producer-img-placeholder { background: linear-gradient(135deg, #2c5f6e, #4a8fa0); }
+.prod-jambi .producer-img-placeholder { background: linear-gradient(135deg, #6b3fa0, #9b6fd4); }
+
+.producer-stamp {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: var(--gold);
+  color: var(--brown);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  transform: rotate(2deg);
+}
+.producer-stamp.ft { background: var(--green); color: white; }
+.producer-stamp.wfto { background: var(--blue); color: white; }
+
+.producer-flag {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.producer-body {
+  padding: 1.75rem;
+}
+.producer-country {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brown-light);
+  margin-bottom: 0.3rem;
+}
+.producer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--brown);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.producer-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.producer-product-tag {
+  background: var(--cream-dark);
+  color: var(--brown-mid);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+.producer-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.producer-stat .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+}
+.producer-stat .lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown-light);
+}
+.producer-why {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--brown-mid);
+  line-height: 1.6;
+  font-style: italic;
+  padding: 0.75rem 1rem;
+  background: var(--cream);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  margin-top: 1rem;
+}
+.producer-why::before { content: '" '; color: var(--gold); font-size: 1.4rem; line-height: 0; }
+
+/* ── BOUTIQUE ── */
+.boutique {
+  background: var(--green-dark);
+  padding: 7rem 2rem;
+  color: white;
+  overflow: hidden;
+}
+.boutique-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.boutique .section-label { color: var(--gold); opacity: 1; }
+.boutique .section-title { color: white; }
+
+.boutique-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+
+.boutique-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 280px 220px;
+  gap: 1rem;
+}
+.boutique-photo {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.boutique-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s;
+}
+.boutique-photo:hover img { transform: scale(1.05); }
+.boutique-photo:first-child {
+  grid-column: 1 / -1;
+}
+.boutique-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.boutique-info { }
+.boutique-info p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+.info-card h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.info-card p { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.7; margin: 0; }
+.info-card .hours { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; }
+.info-card .hour-row { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+.info-card .hour-row strong { color: white; }
+
+.map-embed {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+.map-placeholder {
+  background: rgba(255,255,255,0.08);
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+}
+.map-placeholder .map-icon { font-size: 2.5rem; }
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gold);
+  color: var(--brown);
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  margin-top: 0.75rem;
+  transition: all 0.2s;
+}
+.map-link:hover { background: var(--gold-light); }
+
+/* ── PRODUCCIÓN ── */
+.produccion {
+  background: var(--cream);
+  padding: 7rem 2rem;
+}
+.produccion-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.produccion .section-label { color: var(--red); }
+.produccion-visual {
+  position: relative;
+}
+.produccion-big-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 900;
+  color: var(--cream-dark);
+  line-height: 0.9;
+  user-select: none;
+  position: relative;
+  z-index: 0;
+}
+.produccion-card {
+  position: relative;
+  z-index: 1;
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 40px rgba(44,24,16,0.1);
+  margin-top: -3rem;
+  border-top: 5px solid var(--red);
+}
+.produccion-card h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.5rem;
+}
+.produccion-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+.produccion-card p { font-size: 0.9rem; line-height: 1.8; color: var(--brown-mid); }
+.produccion-card .fact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+  font-size: 0.9rem;
+  color: var(--brown-mid);
+}
+.produccion-card .fact:last-child { border-bottom: none; }
+.produccion-card .fact-icon { font-size: 1.2rem; }
+.produccion-text p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--brown-mid);
+  margin-bottom: 1.5rem;
+}
+.produccion-text .handwriting {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: var(--red);
+  display: block;
+  margin: 1.5rem 0;
+  transform: rotate(-1deg);
+}
+
+/* ── VALORES ── */
+.valores {
+  background: var(--brown);
+  padding: 7rem 2rem;
+  color: white;
+}
+.valores-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.valores .section-label { color: var(--gold); opacity: 1; }
+.valores .section-title { color: white; }
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.valor-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(232,184,75,0.15);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.valor-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.valor-card:nth-child(1)::before { background: var(--gold); }
+.valor-card:nth-child(2)::before { background: var(--green); }
+.valor-card:nth-child(3)::before { background: var(--blue); }
+.valor-card:nth-child(4)::before { background: var(--red); }
+.valor-card:hover::before { opacity: 1; }
+.valor-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-6px); }
+.valor-icon { font-size: 3rem; margin-bottom: 1rem; }
+.valor-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.valor-card p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #1a0d08;
+  color: rgba(253,248,240,0.7);
+  padding: 4rem 2rem 2rem;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 2rem;
+}
+.footer-brand-logo-wrap {
+  display: inline-block;
+  background: #fdf8f0;
+  border-radius: 16px;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+  line-height: 0;
+}
+.footer-brand-logo-wrap img {
+  width: 110px;
+  height: auto;
+  display: block;
+  mix-blend-mode: multiply;
+}
+.footer-brand-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+}
+.footer-brand-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.footer-brand p { font-size: 0.88rem; line-height: 1.7; }
+.footer-col h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+.footer-col a, .footer-col p {
+  display: block;
+  color: rgba(253,248,240,0.65);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: 0.4rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.social-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.social-btn:hover { background: var(--gold); transform: translateY(-2px); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom .love { color: var(--gold); }
+.fair-trade-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(74,124,89,0.3);
+  border: 1px solid rgba(74,124,89,0.5);
+  border-radius: 30px;
+  padding: 0.35rem 0.9rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6abf5e;
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { display: none; }
+  .concepto-inner, .exp-grid, .boutique-grid, .produccion-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .producer-grid { grid-template-columns: 1fr; }
+  .valores-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .boutique-photos { grid-template-rows: 240px 200px; }
+}
+@media (max-width: 600px) {
+  .valores-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .promo-cards { flex-direction: column; align-items: center; }
+  .hero h1 { font-size: 3rem; }
+}
+
+/* ── STICKY NAV SCROLL ── */
+.nav-scrolled {
+  background: rgba(44,24,16,0.98);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<!-- PROMO TOP BANNER -->
+<div class="promo-banner">
+  🎉 <span>INAUGURACIÓN 23 ABRIL</span> — ¡Visítanos y recibe un descuento especial de apertura!
+  &nbsp;|&nbsp; 📍 Carrer del Rec 24, El Born, Barcelona
+  &nbsp;|&nbsp; 🎁 <span>OFERTA LIMITADA</span>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav" class="has-banner">
+  <a href="#concepto">Concepto</a>
+  <a href="#experiencia">Taller</a>
+  <a href="#productores">Productores</a>
+  <a href="#boutique">Boutique</a>
+  <a href="#valores">Valores</a>
+  <a href="#boutique" class="nav-cta">Reservar →</a>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div class="hero-circle hero-circle-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-opening-badge">
+      <span class="badge-dot"></span>
+      Abrimos el 23 de abril · El Born, Barcelona
+    </div>
+
+    <img src="images/Logo_Origo.PNG" alt="ORIGO Cacao Studio" class="hero-logo" onerror="this.style.display='none'"/>
+
+    <h1>ORIGO<em>Cacao Studio</em></h1>
+    <p class="hero-sub">Del origen al sabor · Comercio justo · Cacao vivo</p>
+
+    <div class="hero-tags">
+      <span class="hero-tag">🏛️ Museo del Cacao</span>
+      <span class="hero-tag">🍫 Taller Lúdico</span>
+      <span class="hero-tag">🌿 Comercio Justo</span>
+      <span class="hero-tag">🌎 América Latina</span>
+    </div>
+
+    <div>
+      <a href="#experiencia" class="hero-cta">Descubrir el taller ↓</a>
+      <a href="#productores" class="hero-cta-ghost">Nuestros productores</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Descubrir</div>
+</section>
+
+<!-- ══════════════════ PROMO INAUGURACIÓN ══════════════════ -->
+<section class="promo-section" id="inauguracion">
+  <div class="promo-inner">
+    <div class="promo-date-badge">23 de Abril — Día de Inauguración</div>
+    <h2>Celebra con <em>nosotros</em></h2>
+    <p>¡Abrimos las puertas de ORIGO Cacao Studio! Para celebrar nuestra inauguración, hemos preparado ofertas especiales de tiempo limitado. Ven, descubre el cacao de comercio justo y crea tu propia tableta el día de apertura.</p>
+
+    <div class="promo-cards">
+      <div class="promo-card reveal">
+        <div class="icon">🍫</div>
+        <div class="value">-20%</div>
+        <div class="label">En toda la tienda<br/>el día de apertura</div>
+      </div>
+<div class="promo-card reveal reveal-delay-2">
+        <div class="icon">☕</div>
+        <div class="value">Gratis</div>
+        <div class="label">Chocolate caliente<br/>con cada visita</div>
+      </div>
+      <div class="promo-card reveal reveal-delay-3">
+        <div class="icon">🏭</div>
+        <div class="value">-15%</div>
+        <div class="label">En el taller de<br/>elaboración de tableta</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem; margin-bottom:1rem; opacity:0.7">* Ofertas válidas únicamente el 23 de abril de 2025. Sujetas a disponibilidad.</p>
+
+    <div class="payment-methods">
+      <div class="payment-pill">💳 Tarjeta de crédito/débito</div>
+      <div class="payment-pill">💵 Efectivo</div>
+      <div class="payment-pill">📱 Bizum</div>
+      <div class="payment-pill">🍎 Apple Pay / Google Pay</div>
+    </div>
+
+    <br/>
+    <a href="#boutique" class="promo-cta-btn">Ver horarios y ubicación →</a>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<svg class="wave-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="background:var(--cream); display:block;">
+  <path d="M0 30 C240 0 480 60 720 30 C960 0 1200 60 1440 30 L1440 0 L0 0 Z" fill="#8b2a1a" opacity="0.15"/>
+  <path d="M0 40 C360 10 720 70 1080 40 C1260 25 1380 50 1440 40 L1440 0 L0 0 Z" fill="#c84b35" opacity="0.08"/>
+</svg>
+
+<!-- ══════════════════ CONCEPTO ══════════════════ -->
+<section class="concepto" id="concepto">
+  <div class="concepto-inner">
+    <div class="concepto-text reveal">
+      <p class="section-label">— El Concepto</p>
+      <h2 class="section-title">Un viaje del <em>campo</em> a la taza</h2>
+      <p>ORIGO nació de una convicción: el chocolate es mucho más que un dulce. Es historia, territorio, cultura y justicia. Detrás de cada tableta hay familias de agricultores en Bolivia, Guatemala y Ecuador que han dedicado su vida al cacao y a las especias más extraordinarias del mundo.</p>
+      <p>En ORIGO reunimos tres experiencias en un solo espacio en el corazón de El Born, Barcelona. Un lugar donde aprender, crear y saborear el cacao de otra manera.</p>
+      <span class="handwriting">Del campo a la tableta, con amor y justicia. 🌱</span>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal reveal-delay-1">
+        <div class="pillar-icon">🏛️</div>
+        <h3>Museo del Cacao</h3>
+        <p>Descubre 3,000 años de historia del cacao, desde los rituales mayas hasta los primeros chocolateros vascos. Exposición permanente con fotografías de nuestros productores, mapas de origen y muestras reales de variedades de habas.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <div class="pillar-icon">🍫</div>
+        <h3>Taller Lúdico</h3>
+        <p>La experiencia estrella. Elige tus propias habas de cacao de comercio justo, selecciona las especias (cardamomo, canela amazónica, ají...) y crea tu tableta única. Para adultos, familias y grupos. Una experiencia sensorial inolvidable.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <div class="pillar-icon">🛍️</div>
+        <h3>Tienda de Comercio Justo</h3>
+        <p>Tabletas artesanales, especias raras, infusiones de cacao y regalos únicos. Cada producto cuenta una historia de sostenibilidad y precio justo. Certificado Fairtrade y WFTO en cada compra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ EXPERIENCIA ══════════════════ -->
+<section class="experiencia" id="experiencia">
+  <div class="experiencia-inner">
+    <div class="reveal">
+      <p class="section-label">— El Taller Lúdico</p>
+      <h2 class="section-title gold">Crea <em>tu</em> tableta perfecta</h2>
+    </div>
+
+    <div class="exp-grid">
+      <div class="exp-photo reveal reveal-delay-1">
+        <img src="images/taller.jpg" alt="Taller ORIGO Cacao Studio" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="exp-photo-placeholder" style="display:none">🍫</div>
+        <div class="exp-photo-tag">¡Tú eres el chocolatero!</div>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Elige tus habas de cacao</h4>
+            <p>Selecciona entre variedades de Bolivia (El Ceibo, Alto Beni), Ecuador y Perú. Cada haba tiene un perfil de sabor único: frutal, terroso, floral. Las hueles, las tocas y decides.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Selecciona tus especias</h4>
+            <p>Cardamomo de Guatemala, canela amazónica (Ishpink) de Ecuador, ají salvaje, jengibre, cúrcuma... Mezcla atrevida o clásica refinada. Tú decides el carácter de tu tableta.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Elabora y tempera</h4>
+            <p>Con la guía de nuestros chocolateros, fundes, mezclas y temperas. Aprenderás la técnica artesanal que se practica en el País Vasco desde el siglo XVII.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-4">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Lleva tu creación a casa</h4>
+            <p>Tu tableta, con tu nombre y las coordenadas de origen de tus habas de cacao. Un regalo único y sostenible. Para ti o para alguien especial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PRODUCTORES ══════════════════ -->
+<section class="productores" id="productores">
+  <div class="productores-inner">
+    <div class="reveal">
+      <p class="section-label">— Nuestros Productores</p>
+      <h2 class="section-title">Las personas detrás <em>del sabor</em></h2>
+    </div>
+    <p class="productores-intro reveal">En ORIGO no compramos ingredientes. Construimos relaciones. Cada productor fue elegido por su compromiso con la tierra, con sus comunidades y con el comercio justo. Sus historias viven en cada tableta que vendemos.</p>
+
+    <div class="producer-grid">
+
+      <!-- EL CEIBO -->
+      <div class="producer-card prod-ceibo reveal">
+        <div class="producer-flag">🇧🇴</div>
+        <div class="producer-stamp ft">Fairtrade desde 2004</div>
+        <img src="https://fedecovera.com/images/defile_fotos/slide1.jpg" alt="El Ceibo Bolivia" class="producer-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="producer-img-placeholder" style="display:none">🌱</div>
+        <div class="producer-body">
+          <p class="producer-country">Bolivia · Alto Beni, La Paz</p>
+          <h3 class="producer-name">El Ceibo</h3>
+          <div class="producer-products">
+            <span class="producer-product-tag">🍫 Cacao orgánico</span>
+            <span class="producer-product-tag">Del árbol a la tableta</span>
+          </div>
+          <div class="producer-stats">
+            <div class="producer-stat">
+              <div class="num">1,300+</div>
+              <div class="lbl">Familias</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">48</div>
+              <div class="lbl">Cooperativas</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">1977</div>
+              <div class="lbl">Fundación</div>
+            </div>
+          </div>
+          <p style="font-size:0.88rem;line-height:1.75;color:var(--brown-mid)">El Ceibo es la cooperativa más importante de Bolivia y el <strong>primer exportador mundial de cacao orgánico desde 1987</strong>. Lo que los hace únicos: los propios agricultores poseen la marca, la fábrica y los puntos de venta. Una empresa 100% campesina, de las habas a la tableta.</p>
+          <div class="producer-why">Porque en El Ceibo, cada tableta es el resultado de 47 años de lucha colectiva. Son los agricultores quienes poseen la marca, la fábrica, y el futuro.</div>
+        </div>
+      </div>
+
+      <!-- FEDECOVERA -->
+      <div class="producer-card prod-fedecovera reveal reveal-delay-1">
+        <div class="producer-flag">🇬🇹</div>
+        <div class="producer-stamp ft">Fairtrade + Orgánico</div>
+        <img src="https://fedecovera.com/images/defile_fotos/slide3.jpg" alt="FEDECOVERA Guatemala" class="producer-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="producer-img-placeholder" style="display:none">🌿</div>
+        <div class="producer-body">
+          <p class="producer-country">Guatemala · Cobán, Alta Verapaz</p>
+          <h3 class="producer-name">FEDECOVERA</h3>
+          <div class="producer-products">
+            <span class="producer-product-tag">💚 Cardamomo</span>
+            <span class="producer-product-tag">🫙 Pimienta Gorda</span>
+          </div>
+          <div class="producer-stats">
+            <div class="producer-stat">
+              <div class="num">33,000</div>
+              <div class="lbl">Familias</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">42</div>
+              <div class="lbl">Cooperativas</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">#1</div>
+              <div class="lbl">Mundial Cardamomo</div>
+            </div>
+          </div>
+          <p style="font-size:0.88rem;line-height:1.75;color:var(--brown-mid)">Las Verapaces producen el mejor cardamomo del mundo, el llamado <strong>"Oro Verde de Guatemala"</strong>. FEDECOVERA lo cultiva desde 1976 en sistemas agroforestales mayas, entre bosques tropicales y cultivos ancestrales, con comunidades Q'eqchi y Poqomchi que hablan su lengua indígena.</p>
+          <div class="producer-why">El cardamomo de las Verapaces es oro verde. FEDECOVERA lo cultiva en sistemas agroforestales mayas, sin químicos, desde 1976.</div>
+        </div>
+      </div>
+
+      <!-- CHANKUAP -->
+      <div class="producer-card prod-chankuap reveal reveal-delay-2">
+        <div class="producer-flag">🇪🇨</div>
+        <div class="producer-stamp wfto">WFTO · Camari</div>
+        <img src="https://chankuap.org/modules/ndfmainslider/images/cb813dddac29f53d3eeae2261eceab28ad4753b4_banner01.jpg" alt="Fundación Chankuap Ecuador" class="producer-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="producer-img-placeholder" style="display:none">🌳</div>
+        <div class="producer-body">
+          <p class="producer-country">Ecuador · Morona Santiago, Amazonia</p>
+          <h3 class="producer-name">Fundación Chankuap</h3>
+          <div class="producer-products">
+            <span class="producer-product-tag">🌿 Canela Amazónica Ishpink</span>
+            <span class="producer-product-tag">🫚 Jengibre</span>
+            <span class="producer-product-tag">🟡 Cúrcuma</span>
+            <span class="producer-product-tag">🟢 Pistachos</span>
+          </div>
+          <div class="producer-stats">
+            <div class="producer-stat">
+              <div class="num">130</div>
+              <div class="lbl">Productores</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">26</div>
+              <div class="lbl">Localidades</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">1996</div>
+              <div class="lbl">Fundación</div>
+            </div>
+          </div>
+          <p style="font-size:0.88rem;line-height:1.75;color:var(--brown-mid)">Las comunidades <strong>Shuar y Achuar</strong> del TransKutukú guardan un secreto botánico extraordinario: la <em>Ishpink</em>, una canela amazónica silvestre (Ocotea quixos) que no crece en ningún otro lugar del mundo. Producen también <strong>pistachos</strong>, jengibre y cúrcuma orgánicos. Chankuap significa "recursos para el futuro" — y así trabajan, preservando la biodiversidad amazónica.</p>
+          <div class="producer-why">La Ishpink es una canela silvestre de la Amazonia ecuatoriana. Solo crece aquí. Solo las comunidades Shuar saben encontrarla.</div>
+        </div>
+      </div>
+
+      <!-- JAMBI KIWA -->
+      <div class="producer-card prod-jambi reveal reveal-delay-3">
+        <div class="producer-flag">🇪🇨</div>
+        <div class="producer-stamp wfto">SPP · Orgánico · 80% Mujeres</div>
+        <img src="https://ideas.coop/wp-content/uploads/2017/11/jambi_pq.png" alt="Jambi Kiwa Ecuador" class="producer-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="producer-img-placeholder" style="display:none">🌸</div>
+        <div class="producer-body">
+          <p class="producer-country">Ecuador · Riobamba, Chimborazo</p>
+          <h3 class="producer-name">Jambi Kiwa</h3>
+          <div class="producer-products">
+            <span class="producer-product-tag">🌺 Plantas Aromáticas</span>
+            <span class="producer-product-tag">🍵 Té Cacao &amp; Canela</span>
+            <span class="producer-product-tag">🌿 Hierbas Medicinales</span>
+          </div>
+          <div class="producer-stats">
+            <div class="producer-stat">
+              <div class="num">80+</div>
+              <div class="lbl">Familias</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">28</div>
+              <div class="lbl">Comunidades</div>
+            </div>
+            <div class="producer-stat">
+              <div class="num">80%</div>
+              <div class="lbl">Mujeres</div>
+            </div>
+          </div>
+          <p style="font-size:0.88rem;line-height:1.75;color:var(--brown-mid)"><strong>Jambi Kiwa</strong> significa "las plantas que curan" en Quechua. Ochenta familias de mujeres indígenas del Chimborazo cultivan 44 plantas aromáticas a altitudes de entre 400 y 4,200 metros. Su té de Cacao y Canela Orgánico es uno de los productos más emblemáticos de nuestra tienda.</p>
+          <div class="producer-why">Jambi Kiwa significa "las plantas que curan" en Quechua. 80% de sus productoras son mujeres indígenas. Cada infusión lleva décadas de conocimiento ancestral.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BOUTIQUE ══════════════════ -->
+<section class="boutique" id="boutique">
+  <div class="boutique-inner">
+    <div class="reveal">
+      <p class="section-label">— La Boutique</p>
+      <h2 class="section-title">En el corazón <em>de El Born</em></h2>
+    </div>
+
+    <div class="boutique-grid">
+      <div class="boutique-photos reveal">
+        <!-- First row: main photo full width -->
+        <div class="boutique-photo" style="grid-column:1/-1; height:280px">
+          <img src="images/interieur_ORIGO.PNG" alt="ORIGO Cacao Studio interior" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="boutique-photo-placeholder">🏪</div>
+        </div>
+        <!-- Second row: two photos -->
+        <div class="boutique-photo" style="height:220px">
+          <img src="images/interieur_ORIGO2.PNG" alt="Taller ORIGO" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="boutique-photo-placeholder">🍫</div>
+        </div>
+        <div class="boutique-photo" style="height:220px">
+          <img src="images/interieur_ORIGO.PNG" alt="Especias ORIGO" style="object-position: right center" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="boutique-photo-placeholder">🌶️</div>
+        </div>
+      </div>
+
+      <div class="boutique-info reveal reveal-delay-1">
+        <p>Un espacio cálido en el barrio histórico de El Born, donde los aromas del cacao y las especias te reciben desde la calle. Paredes de ladrillo visto, maderas naturales y textiles latinoamericanos crean una atmósfera única que te transporta directamente a la selva amazónica y a las montañas andinas.</p>
+
+        <div class="info-card">
+          <h4>📍 Dirección</h4>
+          <p>Carrer del Rec 24, El Born<br/>08003 Barcelona, España<br/><em style="font-size:0.8rem;opacity:0.7">Metro: Barceloneta (L4) · Jaume I (L4)</em></p>
+        </div>
+
+        <div class="info-card">
+          <h4>🕐 Horarios</h4>
+          <div class="hours">
+            <div class="hour-row"><strong>Lun–Vier</strong></div>
+            <div class="hour-row">10:00 – 20:00</div>
+            <div class="hour-row"><strong>Sábado</strong></div>
+            <div class="hour-row">10:00 – 21:00</div>
+            <div class="hour-row"><strong>Domingo</strong></div>
+            <div class="hour-row">11:00 – 19:00</div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h4>💳 Métodos de pago</h4>
+          <p>Tarjeta de crédito/débito · Efectivo · Bizum · Apple Pay · Google Pay</p>
+        </div>
+
+        <div class="map-embed">
+          <div class="map-placeholder">
+            <div class="map-icon">📍</div>
+            <span>Carrer del Rec 24, El Born</span>
+            <span>Barcelona 08003</span>
+            <a href="https://maps.google.com/?q=Carrer+del+Rec+24+Barcelona" target="_blank" class="map-link">
+              Ver en Google Maps →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PRODUCCIÓN ══════════════════ -->
+<section class="produccion" id="produccion">
+  <div class="produccion-inner">
+    <div class="produccion-visual reveal">
+      <div class="produccion-big-text">País<br/>Vasco</div>
+      <div class="produccion-card">
+        <h4>📍 Nuestra Fábrica</h4>
+        <h3>Vitoria-Gasteiz, Álava</h3>
+        <p>En el corazón de la tierra que vio nacer el chocolate español, elaboramos nuestras tabletas artesanales con habas de comercio justo de El Ceibo Bolivia y las especias más raras de América Latina.</p>
+        <div class="fact"><span class="fact-icon">🏭</span> Taller artesanal de producción Bean-to-Bar</div>
+        <div class="fact"><span class="fact-icon">🌱</span> 100% ingredientes certificados Fairtrade u orgánicos</div>
+        <div class="fact"><span class="fact-icon">🚢</span> Importación directa desde cooperativas productoras</div>
+        <div class="fact"><span class="fact-icon">🎓</span> Chocolateros formados en la tradición vasca</div>
+      </div>
+    </div>
+    <div class="produccion-text reveal reveal-delay-1">
+      <p class="section-label">— La Producción</p>
+      <h2 class="section-title">Donde nació el <em>chocolate español</em></h2>
+      <p>El País Vasco es la cuna del chocolate en España. En el siglo XVII, los primeros chocolateros de Tolosa y Vitoria importaban cacao de América y crearon una tradición que persiste hasta hoy. ORIGO recupera ese legado con una visión contemporánea: comercio justo, trazabilidad total y respeto por el origen.</p>
+      <p>Nuestro taller en Vitoria-Gasteiz es el primer eslabón de la cadena antes de llegar a tu tableta en Barcelona. Aquí seleccionamos las habas de El Ceibo, las tostamos lentamente, mezclamos con las especias de FEDECOVERA y Chankuap, y temperamos a mano cada tableta.</p>
+      <span class="handwriting">De Alto Beni a Vitoria-Gasteiz a tu bolsillo. 🍫</span>
+      <p>La transparencia es nuestra promesa: en cada tableta encontrarás las coordenadas exactas de la cooperativa que produjo el cacao, el nombre del productor y el precio justo pagado por kilo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ VALORES ══════════════════ -->
+<section class="valores" id="valores">
+  <div class="valores-inner">
+    <div class="reveal">
+      <p class="section-label">— Nuestros Valores</p>
+      <h2 class="section-title">Lo que nos <em>define</em></h2>
+    </div>
+
+    <div class="valores-grid">
+      <div class="valor-card reveal">
+        <div class="valor-icon">🤝</div>
+        <h3>Comercio Justo</h3>
+        <p>Pagamos precios por encima del mercado a todas las cooperativas productoras. El precio justo no es opcional para nosotros: es la base de todo lo que hacemos. Certificados Fairtrade International y WFTO.</p>
+      </div>
+      <div class="valor-card reveal reveal-delay-1">
+        <div class="valor-icon">🔍</div>
+        <h3>Trazabilidad Total</h3>
+        <p>Cada tableta tiene un código de origen. Sabes quién cultivó tu cacao, en qué región, con qué técnica. Nada está oculto: del campo a tu mano, cada paso es visible y verificable.</p>
+      </div>
+      <div class="valor-card reveal reveal-delay-2">
+        <div class="valor-icon">🌿</div>
+        <h3>Biodiversidad</h3>
+        <p>Trabajamos con productores que cultivan en sistemas agroforestales, preservando la selva amazónica y los ecosistemas andinos. El cacao y las especias crecen junto a árboles nativos y plantas medicinales.</p>
+      </div>
+      <div class="valor-card reveal reveal-delay-3">
+        <div class="valor-icon">📚</div>
+        <h3>Educación</h3>
+        <p>Nuestro museo y talleres son espacios de aprendizaje. Creemos que un consumidor informado elige mejor. Cuando conoces la historia del cacao y a quién lo cultiva, el chocolate sabe diferente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo-wrap">
+          <img src="images/Logo_Origo.PNG" alt="ORIGO Cacao Studio"/>
+        </div>
+        <div class="footer-brand-sub">Cacao Studio</div>
+        <p>Museo del cacao, taller lúdico y tienda de comercio justo en el corazón de El Born, Barcelona.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" title="Instagram">📸</a>
+          <a href="#" class="social-btn" title="Facebook">📘</a>
+          <a href="#" class="social-btn" title="TikTok">🎵</a>
+          <a href="#" class="social-btn" title="WhatsApp">📱</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Visítanos</h4>
+        <p>Carrer del Rec 24</p>
+        <p>El Born · 08003 Barcelona</p>
+        <p>Lun–Vie: 10–20h</p>
+        <p>Sáb: 10–21h · Dom: 11–19h</p>
+      </div>
+      <div class="footer-col">
+        <h4>Nuestros Productores</h4>
+        <a href="https://elceibo.com" target="_blank">El Ceibo — Bolivia</a>
+        <a href="https://fedecovera.com" target="_blank">FEDECOVERA — Guatemala</a>
+        <a href="https://chankuap.org" target="_blank">Chankuap — Ecuador</a>
+        <a href="https://camari.org" target="_blank">Camari / Jambi Kiwa — Ecuador</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="mailto:hola@origocacao.com">hola@origocacao.com</a>
+        <a href="tel:+34930000000">+34 93 000 00 00</a>
+        <a href="#inauguracion">🎉 Inauguración 23 abril</a>
+        <a href="#experiencia">Reservar taller</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ORIGO Cacao Studio · Barcelona</span>
+      <span>Hecho con <span class="love">❤️</span> y cacao de comercio justo</span>
+      <span class="fair-trade-note">🌿 Fairtrade &amp; WFTO Certified</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Nav scroll effect
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    nav.classList.add('nav-scrolled');
+    nav.classList.remove('has-banner');
+  } else {
+    nav.classList.remove('nav-scrolled');
+    nav.classList.add('has-banner');
+  }
+});
+
+// Countdown timer for April 23
+function updateCountdown() {
+  const target = new Date('2025-04-23T10:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) return;
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const banner = document.querySelector('.promo-banner');
+  if (banner && diff > 0) {
+    const existing = banner.querySelector('.promo-countdown');
+    if (!existing) {
+      const cd = document.createElement('span');
+      cd.className = 'promo-countdown';
+      cd.innerHTML = `<span class="unit">${days}d</span><span class="unit">${hours}h</span><span class="unit">${mins}m</span>`;
+      banner.appendChild(cd);
+    } else {
+      existing.innerHTML = `<span class="unit">${days}d</span><span class="unit">${hours}h</span><span class="unit">${mins}m</span>`;
+    }
+  }
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+</script>
+</body>
+</html>
