@@ -27,13 +27,14 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'Libre Baskerville', Georgia, serif;
   background: var(--cream);
   color: var(--brown);
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* ── NOISE TEXTURE OVERLAY ── */
@@ -1192,54 +1193,61 @@ footer {
     display: flex;
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    z-index: 200;
-    background: rgba(44,24,16,0.97);
-    backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(232,184,75,0.2);
+    z-index: 9999;
+    background: rgba(28,14,8,0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(232,184,75,0.25);
     justify-content: space-around;
-    align-items: center;
-    padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+    align-items: stretch;
+    padding: 0.5rem 0.25rem calc(0.6rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
   }
   .mobile-nav a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.2rem;
+    justify-content: center;
+    gap: 0.15rem;
     text-decoration: none;
-    color: rgba(253,248,240,0.6);
+    color: rgba(253,248,240,0.55);
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 0.4rem 0.6rem;
+    padding: 0.35rem 0.5rem;
     border-radius: 10px;
     transition: all 0.2s;
-    min-width: 52px;
+    flex: 1;
+    max-width: 70px;
   }
-  .mobile-nav a .mn-icon { font-size: 1.3rem; }
-  .mobile-nav a.active,
-  .mobile-nav a:hover { color: var(--gold); background: rgba(232,184,75,0.1); }
+  .mobile-nav a .mn-icon { font-size: 1.2rem; line-height: 1; }
+  .mobile-nav a:hover,
+  .mobile-nav a:active { color: var(--gold); background: rgba(232,184,75,0.08); }
   .mobile-nav a.cta-mobile {
     background: var(--red);
     color: white;
     border-radius: 12px;
-    padding: 0.5rem 0.8rem;
+    flex: 1.2;
+    max-width: 80px;
   }
   .mobile-nav a.cta-mobile:hover { background: #e05c42; color: white; }
 
-  /* Global mobile padding */
-  body { padding-bottom: 70px; }
+  /* Global mobile padding — espace sous le contenu pour la barre fixe */
+  body { padding-bottom: 80px; }
 
   /* Hero mobile */
-  .hero { padding: 5rem 1.25rem 3rem; min-height: 100svh; }
-  .hero-logo { width: 160px; }
-  .hero h1 { font-size: 2.8rem; }
-  .hero-sub { font-size: 0.85rem; letter-spacing: 0.12em; }
-  .hero-tags { gap: 0.5rem; }
-  .hero-tag { font-size: 0.7rem; padding: 0.3rem 0.75rem; }
-  .hero-cta, .hero-cta-ghost { font-size: 0.85rem; padding: 0.85rem 1.5rem; }
-  .hero-cta { margin-right: 0.5rem; }
-  .hero-opening-badge { font-size: 0.72rem; text-align: center; }
+  .hero { padding: 5rem 1.25rem 4rem; min-height: 100svh; overflow: hidden; }
+  .hero-circle { display: none; }
+  .hero-content { width: 100%; max-width: 100%; }
+  .hero-logo { width: 140px; }
+  .hero h1 { font-size: 2.6rem; }
+  .hero-sub { font-size: 0.8rem; letter-spacing: 0.1em; }
+  .hero-tags { gap: 0.4rem; justify-content: center; }
+  .hero-tag { font-size: 0.68rem; padding: 0.25rem 0.65rem; }
+  .hero-cta, .hero-cta-ghost { font-size: 0.82rem; padding: 0.8rem 1.25rem; }
+  .hero-cta { margin-right: 0.4rem; }
+  .hero-opening-badge { font-size: 0.7rem; text-align: center; padding: 0.35rem 0.9rem; }
 
   /* Promo banner mobile */
   .promo-banner { font-size: 0.75rem; padding: 0.55rem 0.75rem; line-height: 1.5; }
