@@ -1192,16 +1192,17 @@ footer {
   .mobile-nav {
     display: flex;
     position: fixed;
-    bottom: 0; left: 0; right: 0;
+    top: 0; left: 0; right: 0;
+    bottom: auto;
     z-index: 9999;
     background: rgba(28,14,8,0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(232,184,75,0.25);
+    border-bottom: 1px solid rgba(232,184,75,0.25);
     justify-content: space-around;
     align-items: stretch;
-    padding: 0.5rem 0.25rem calc(0.6rem + env(safe-area-inset-bottom));
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+    padding: calc(0.5rem + env(safe-area-inset-top)) 0.25rem 0.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   }
   .mobile-nav a {
     display: flex;
@@ -1233,8 +1234,8 @@ footer {
   }
   .mobile-nav a.cta-mobile:hover { background: #e05c42; color: white; }
 
-  /* Global mobile padding — espace sous le contenu pour la barre fixe */
-  body { padding-bottom: 80px; }
+  /* Global mobile padding — espace au dessus pour la barre fixe */
+  body { padding-bottom: 0; padding-top: 70px; }
 
   /* Hero mobile */
   .hero { padding: 5rem 1.25rem 4rem; min-height: 100svh; overflow: hidden; }
