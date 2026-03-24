@@ -1182,11 +1182,120 @@ footer {
   .footer-top { grid-template-columns: 1fr 1fr; }
   .boutique-photos { grid-template-rows: 240px 200px; }
 }
-@media (max-width: 600px) {
-  .valores-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr; }
-  .promo-cards { flex-direction: column; align-items: center; }
-  .hero h1 { font-size: 3rem; }
+
+/* ── MOBILE NAV ── */
+.mobile-nav {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: rgba(44,24,16,0.97);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(232,184,75,0.2);
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  }
+  .mobile-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    text-decoration: none;
+    color: rgba(253,248,240,0.6);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.6rem;
+    border-radius: 10px;
+    transition: all 0.2s;
+    min-width: 52px;
+  }
+  .mobile-nav a .mn-icon { font-size: 1.3rem; }
+  .mobile-nav a.active,
+  .mobile-nav a:hover { color: var(--gold); background: rgba(232,184,75,0.1); }
+  .mobile-nav a.cta-mobile {
+    background: var(--red);
+    color: white;
+    border-radius: 12px;
+    padding: 0.5rem 0.8rem;
+  }
+  .mobile-nav a.cta-mobile:hover { background: #e05c42; color: white; }
+
+  /* Global mobile padding */
+  body { padding-bottom: 70px; }
+
+  /* Hero mobile */
+  .hero { padding: 5rem 1.25rem 3rem; min-height: 100svh; }
+  .hero-logo { width: 160px; }
+  .hero h1 { font-size: 2.8rem; }
+  .hero-sub { font-size: 0.85rem; letter-spacing: 0.12em; }
+  .hero-tags { gap: 0.5rem; }
+  .hero-tag { font-size: 0.7rem; padding: 0.3rem 0.75rem; }
+  .hero-cta, .hero-cta-ghost { font-size: 0.85rem; padding: 0.85rem 1.5rem; }
+  .hero-cta { margin-right: 0.5rem; }
+  .hero-opening-badge { font-size: 0.72rem; text-align: center; }
+
+  /* Promo banner mobile */
+  .promo-banner { font-size: 0.75rem; padding: 0.55rem 0.75rem; line-height: 1.5; }
+  .promo-countdown { display: none; }
+  .promo-inner { padding: 3rem 1.25rem; }
+  .promo-section h2 { font-size: 2.2rem; }
+  .promo-section p { font-size: 0.95rem; }
+  .promo-cards { flex-direction: column; align-items: center; width: 100%; }
+  .promo-card { width: 100%; max-width: 300px; padding: 1.25rem; }
+  .payment-methods { flex-direction: column; align-items: center; gap: 0.6rem; }
+  .payment-pill { font-size: 0.8rem; width: 100%; max-width: 280px; justify-content: center; }
+
+  /* Sections padding */
+  .concepto, .experiencia, .productores, .boutique, .produccion, .valores { padding: 4.5rem 1.25rem; }
+
+  /* Concepto */
+  .concepto-inner { gap: 2.5rem; }
+  .section-title { font-size: 2rem; }
+  .pillar { padding: 1.25rem; }
+
+  /* Experiencia */
+  .exp-photo img, .exp-photo-placeholder { height: 280px; }
+  .step { padding: 1rem; gap: 1rem; }
+  .step-num { width: 40px; height: 40px; font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Productores */
+  .producer-grid { gap: 1.5rem; }
+  .producer-img { height: 200px; }
+  .producer-stats { gap: 1rem; }
+  .producer-stat .num { font-size: 1.2rem; }
+
+  /* Boutique */
+  .boutique-photos {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 0.75rem;
+  }
+  .boutique-photo:first-child { height: 260px; }
+  .boutique-photo { height: 200px; }
+  .boutique-photo:first-child { grid-column: 1; }
+  .info-card { padding: 1.1rem; }
+  .info-card .hours { grid-template-columns: 1fr 1fr; }
+
+  /* Produccion */
+  .produccion-big-text { font-size: 5rem; }
+  .produccion-card { padding: 1.5rem; margin-top: -2rem; }
+
+  /* Valores */
+  .valores-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .valor-card { padding: 1.5rem; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-brand img { width: 100px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.75rem; }
+  footer { padding: 3rem 1.25rem 1.5rem; }
 }
 
 /* ── STICKY NAV SCROLL ── */
@@ -1213,6 +1322,15 @@ footer {
   <a href="#boutique">Boutique</a>
   <a href="#valores">Valores</a>
   <a href="#boutique" class="nav-cta">Reservar →</a>
+</nav>
+
+<!-- ── MOBILE BOTTOM NAV ── -->
+<nav class="mobile-nav">
+  <a href="#concepto"><span class="mn-icon">🏛️</span>Concepto</a>
+  <a href="#experiencia"><span class="mn-icon">🍫</span>Taller</a>
+  <a href="#productores"><span class="mn-icon">🌿</span>Productores</a>
+  <a href="#boutique"><span class="mn-icon">📍</span>Boutique</a>
+  <a href="#boutique" class="cta-mobile"><span class="mn-icon">🎟️</span>Reservar</a>
 </nav>
 
 <!-- ══════════════════ HERO ══════════════════ -->
@@ -1335,8 +1453,8 @@ footer {
 
     <div class="exp-grid">
       <div class="exp-photo reveal reveal-delay-1">
-        <img src="images/taller.jpg" alt="Taller ORIGO Cacao Studio" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-        <div class="exp-photo-placeholder" style="display:none">🍫</div>
+        <img src="images/taller.jpg" alt="Taller ORIGO Cacao Studio"/>
+
         <div class="exp-photo-tag">¡Tú eres el chocolatero!</div>
       </div>
 
@@ -1487,7 +1605,7 @@ footer {
       <div class="producer-card prod-jambi reveal reveal-delay-3">
         <div class="producer-flag">🇪🇨</div>
         <div class="producer-stamp wfto">SPP · Orgánico · 80% Mujeres</div>
-        <img src="https://ideas.coop/wp-content/uploads/2017/11/jambi_pq.png" alt="Jambi Kiwa Ecuador" class="producer-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <img src="https://ideas.coop/wp-content/uploads/2017/11/jambi_pq.png" alt="Jambi Kiwa Ecuador" class="producer-img" style="object-position: center 30%;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
         <div class="producer-img-placeholder" style="display:none">🌸</div>
         <div class="producer-body">
           <p class="producer-country">Ecuador · Riobamba, Chimborazo</p>
