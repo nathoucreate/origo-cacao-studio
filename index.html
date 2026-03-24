@@ -1195,6 +1195,18 @@ footer {
   display: none;
 }
 @media (max-width: 900px) {
+  /* NUCLEAR OVERFLOW FIX */
+  *, *::before, *::after {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  section, header, footer, div, p, h1, h2, h3, h4, span {
+    overflow-x: hidden;
+  }
+  .wave-divider svg, svg { max-width: 100vw !important; overflow: hidden; }
+  .produccion-big-text { font-size: 4rem !important; overflow: hidden; }
+  .hero-bg-pattern { display: none; }
+
   .mobile-nav {
     display: flex;
     position: fixed;
@@ -1831,6 +1843,22 @@ footer {
 </footer>
 
 <script>
+// Force no horizontal overflow on mobile
+if (window.innerWidth <= 900) {
+  document.documentElement.style.overflowX = 'hidden';
+  document.body.style.overflowX = 'hidden';
+  // Find and fix any element wider than viewport
+  document.querySelectorAll('*').forEach(el => {
+    if (el.getBoundingClientRect().right > window.innerWidth + 5) {
+      el.style.maxWidth = '100%';
+      el.style.overflowX = 'hidden';
+      el.style.boxSizing = 'border-box';
+    }
+  });
+  // Force scroll back to left
+  window.scrollTo(0, window.scrollY);
+}
+
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
